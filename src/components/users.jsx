@@ -55,7 +55,7 @@ const Users = () => {
                     <td>{user.rate}/5</td>
                     <td><button
                         onClick={() => handleDelete(user._id)}
-                        className='btn btn-danger border-0'>
+                        className='btn btn-danger'>
                         Delete
                     </button></td>
                 </tr>)}
