@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import api from '../api';
+import { IUser } from "../types";
 
-const Users = () => {
-    const [users, setUsers] = useState(api.users.fetchAll());
+const Users: React.FC = (): JSX.Element => {
+    const [users, setUsers] = useState<IUser[]>(api.users.fetchAll());
 
-    const handleDelete = (userId) => {
+    const handleDelete = (userId: string): void => {
         setUsers(users.filter(user => user._id !== userId));
     }
 
-    const renderPhrase = (number) => {
-        let message = 'Никто с тобой не тусанёт';
-        let classname = 'danger';
+    const renderPhrase = (number: number): JSX.Element => {
+        let message: string = 'Никто с тобой не тусанёт';
+        let classname: string = 'danger';
 
         if (number !== 0) {
-            const template = 'с тобой сегодня';
+            const template: string = 'с тобой сегодня';
             message = number >= 2 && number <= 4
                 ? number.toString() + ' человека тусанут ' + template
                 : number.toString() + ' человек тусанёт ' + template;
