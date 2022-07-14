@@ -1,35 +1,28 @@
 export interface IProfessions {
-    [key: string]: {
-        _id: string,
-        name: string
-    }
+  [key: string]: IProfession;
 }
 
 interface IProfession {
-    _id: string,
-    name: string
+  _id: string;
+  name: string;
 }
 
 export interface IQualities {
-    [key: string]: {
-        _id: string,
-        name: string,
-        color: string
-    }
+  [key: string]: IQuality;
 }
 
-interface IQuality {
-    _id: string,
-    name: string,
-    color: string
+export interface IQuality {
+  _id: string;
+  name: string;
+  color: string;
 }
 
 export interface IUser {
-    _id: string,
-    name: string,
-    profession: IProfession,
-    qualities: IQuality[],
-    completedMeetings: number,
-    rate: number,
-    bookmark: boolean
+  _id: string;
+  name: string;
+  profession: IProfession;
+  qualities: IQuality[];
+  completedMeetings: number;
+  rate: number;
+  bookmark: boolean;
 }

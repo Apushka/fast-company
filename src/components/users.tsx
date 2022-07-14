@@ -1,68 +1,41 @@
-import React, { useState } from "react";
-import api from '../api';
+import { FC } from "react";
 import { IUser } from "../types";
+import SearchStatus from "./searchStatus";
+import User from "./user";
 
-const Users: React.FC = (): JSX.Element => {
-    const [users, setUsers] = useState<IUser[]>(api.users.fetchAll());
+interface UsersPropsType {
+  users: IUser[];
+  onDeleteUser: (userId: string) => void;
+  onBookmarkToggle: (id: string) => void;
+}
 
-    const handleDelete = (userId: string): void => {
-        setUsers(users.filter(user => user._id !== userId));
-    }
+const Users: FC<UsersPropsType> = ({ users, ...rest }) => {
+  return (
+    <>
+      <SearchStatus usersAmount={users.length} />
 
-    const renderPhrase = (number: number): JSX.Element => {
-        let message: string = 'Никто с тобой не тусанёт';
-        let classname: string = 'danger';
-
-        if (number !== 0) {
-            const template: string = 'с тобой сегодня';
-            message = number >= 2 && number <= 4
-                ? number.toString() + ' человека тусанут ' + template
-                : number.toString() + ' человек тусанёт ' + template;
-
-            classname = 'primary';
-        }
-
-        return <h3>
-            <span className={`badge bg-${classname}`}>
-                {message}
-            </span>
-        </h3>
-    }
-
-    return <>
-        {renderPhrase(users.length)}
-        {users.length !== 0 && <table className="table">
-            <thead>
-                <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Качества</th>
-                    <th scope="col">Профессия</th>
-                    <th scope="col">Встретился, раз</th>
-                    <th scope="col">Оценка</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {users.map(user => <tr key={user._id}>
-                    <td>{user.name}</td>
-                    <td>{user.qualities.map(quality => <span
-                        className={`badge bg-${quality.color} m-1`}
-                        key={quality._id}>
-                        {quality.name}
-                    </span>)}
-                    </td>
-                    <td>{user.profession.name}</td>
-                    <td>{user.completedMeetings}</td>
-                    <td>{user.rate}/5</td>
-                    <td><button
-                        onClick={() => handleDelete(user._id)}
-                        className='btn btn-danger'>
-                        Delete
-                    </button></td>
-                </tr>)}
-            </tbody>
-        </table>}
+      {users.length > 0 && (
+        <table className="table align-middle">
+          <thead>
+            <tr>
+              <th scope="col">Имя</th>
+              <th scope="col">Качества</th>
+              <th scope="col">Профессия</th>
+              <th scope="col">Встретился, раз</th>
+              <th scope="col">Оценка</th>
+              <th scope="col">Избранное</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <User key={user._id} user={user} {...rest} />
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
+  );
 };
 
 export default Users;

@@ -126,7 +126,7 @@ const users: IUser[] = [
         completedMeetings: 434,
         rate: 5,
         bookmark: false
-    },
+    }
 ]
 export function fetchAll(): IUser[] {
     return users
