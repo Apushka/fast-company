@@ -1,19 +1,16 @@
 import { FC } from "react";
-import { IUser } from "../types";
-import SearchStatus from "./searchStatus";
+import { handleDelete, handleToogleBookMark, IUser } from "../types";
 import User from "./user";
 
 interface UsersPropsType {
   users: IUser[];
-  onDeleteUser: (userId: string) => void;
-  onBookmarkToggle: (id: string) => void;
+  onDeleteUser: handleDelete;
+  onBookmarkToggle: handleToogleBookMark;
 }
 
 const Users: FC<UsersPropsType> = ({ users, ...rest }) => {
   return (
     <>
-      <SearchStatus usersAmount={users.length} />
-
       {users.length > 0 && (
         <table className="table align-middle">
           <thead>

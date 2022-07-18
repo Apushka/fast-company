@@ -26,3 +26,6 @@ export interface IUser {
   rate: number;
   bookmark: boolean;
 }
+
+export type handleToogleBookMark = (id: string) => void;
+export type handleDelete = (id: string) => void;

@@ -12,11 +12,7 @@ const Bookmark: FC<BookmarkPropsType> = ({ id, status, onBookmarkToggle }) => {
       className=" border border-dark p-1 bg-light"
       onClick={() => onBookmarkToggle(id)}
     >
-      {status ? (
-        <i className="bi bi-bookmark-fill"></i>
-      ) : (
-        <i className="bi bi-bookmark"></i>
-      )}
+      <i className={`bi bi-bookmark${status ? "-fill" : ""}`}></i>
     </span>
   );
 };

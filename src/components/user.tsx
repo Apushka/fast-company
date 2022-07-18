@@ -1,17 +1,17 @@
 import { FC } from "react";
-import { IUser } from "../types";
+import { handleDelete, handleToogleBookMark, IUser } from "../types";
 import Bookmark from "./bookmark";
 import Quality from "./quality";
 
 interface UserPropsType {
   user: IUser;
-  onDeleteUser: (userId: string) => void;
-  onBookmarkToggle: (id: string) => void;
+  onDeleteUser: handleDelete;
+  onBookmarkToggle: handleToogleBookMark;
 }
 
 const User: FC<UserPropsType> = ({ user, ...rest }) => {
   return (
-    <tr key={user._id}>
+    <tr>
       <td>{user.name}</td>
       <td>
         {user.qualities.map((quality) => (
